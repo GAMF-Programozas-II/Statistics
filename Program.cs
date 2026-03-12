@@ -83,18 +83,54 @@ static class StatAnalyzer
     }
   }
 //------------------- ArrayExtensions osztály ------------------
+// Ez egy statikus osztály, amely bővítő metódust tartalmaz.
+// A bővítő metódusok (extension methods) lehetővé teszik, hogy
+// meglévő típusokhoz új metódusokat adjunk hozzá anélkül, hogy
+// módosítanánk az eredeti típus forráskódját vagy örökölnénk belőle.
 static class ArrayExtensions
 {
+  // BŐVÍTŐ METÓDUS (Extension Method) magyarázata:
+  // --------------------------------------------
+  // A bővítő metódus egy speciális statikus metódus, amely úgy viselkedik,
+  // mintha az első paraméterként megadott típus saját metódusa lenne.
+  // 
+  // A "this" kulcsszó az első paraméter előtt jelzi, hogy ez bővítő metódus.
+  // Így a metódus nem csak hagyományos módon hívható (ArrayExtensions.ToFormattedString(tomb)),
+  // hanem közvetlenül a tömb objektumon is (tomb.ToFormattedString()),
+  // mintha az int[] típus saját metódusa lenne.
+  //
+  // PARAMÉTEREZÉS:
+  // - "this int[] a": Az első paraméter MINDIG "this" kulcsszóval kezdődik
+  //   * "this" = jelzi, hogy bővítő metódusról van szó
+  //   * "int[]" = azt a típust határozza meg, amelyet bővítünk (jelen esetben int tömb)
+  //   * "a" = a paraméter neve, ezen keresztül érjük el a tömb elemeit a metóduson belül
+  //
+  // HASZNÁLAT:
+  // Ha van egy "int[] szamok" tömbünk, akkor hívhatjuk:
+  // - szamok.ToFormattedString()  <- így néz ki úgy, mintha az int[] saját metódusa lenne
+  // - ArrayExtensions.ToFormattedString(szamok)  <- hagyományos statikus metódus hívás is működik
+  
   public static string ToFormattedString(this int[] a)
   {
+    // Egy üres stringet hozunk létre, amely a formázott kimenetet fogja tartalmazni
     string s = "{";
+    
+    // Végigiterálunk a tömb összes elemén
     for (int i = 0; i < a.Length; i++)
     {
+      // Hozzáfűzzük az aktuális elemet a stringhez
       s += a[i];
+      
+      // Ha nem az utolsó elemnél járunk, vesszőt is hozzáfűzünk
+      // Ez biztosítja, hogy az utolsó elem után ne legyen vessző
       if (i < a.Length - 1)
         s += ",";
     }
+    
+    // Lezárjuk a stringet záró kapcsos zárójellel
     s += "}";
+    
+    // Visszaadjuk a formázott stringet (pl. "{2,2,2,2,3,3,3,4,6,7,8}")
     return s;
   }
 }
