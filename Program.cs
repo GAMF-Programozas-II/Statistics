@@ -20,9 +20,9 @@ internal class Program
     Console.WriteLine("Min: " + StatAnalyzer.GetMin(a));
     Console.WriteLine("Max: " + StatAnalyzer.GetMax(a));
     int[] u = StatAnalyzer.GetUnique(a);
-    Console.WriteLine("Unique:    " + u.ToFormattedString());
+    Console.WriteLine("Egyedi:    " + u.ToFormattedString());
     int[] g= StatAnalyzer.GetFrequency(a,u);
-    Console.WriteLine("Frequency: " + g.ToFormattedString());
+    Console.WriteLine("Gyakoriság: " + g.ToFormattedString());
   }
 }
 //------------------- StatAnalyzer osztály ------------------
@@ -56,14 +56,14 @@ static class StatAnalyzer
       // hozzáadjuk a u listához.
       for (int i = 0; i < a.Length; i++)
       {
-        bool contains = false;
+        bool tartalmaz = false;
         for (int j = 0; j < u.Count; j++)
           if (a[i] == u[j])
           {
-            contains = true;
+            tartalmaz = true;
             break;
           }
-        if (!contains)
+        if (!tartalmaz)
           u.Add(a[i]);
       }
       return u.ToArray();
