@@ -110,7 +110,7 @@ static class ArrayExtensions
   // - szamok.ToFormattedString()  <- így néz ki úgy, mintha az int[] saját metódusa lenne
   // - ArrayExtensions.ToFormattedString(szamok)  <- hagyományos statikus metódus hívás is működik
   
-  public static string ToFormattedString(this int[] a)
+  public static string ToFormattedString(this int[] a) 
   {
     // Egy üres stringet hozunk létre, amely a formázott kimenetet fogja tartalmazni
     string s = "{";
